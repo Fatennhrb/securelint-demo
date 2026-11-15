@@ -18,4 +18,7 @@ jobs:
           fetch-depth: 0 # the whole history, to find the changed lines
           persist-credentials: false
       # Pinned to a commit of SecureLint, like every other action.
-      - uses: Fatennhrb/SecureLint@4e82c757b7d459ec90a8c3a4c9c58f23f1c2a4b0
+      - uses: Fatennhrb/SecureLint@5197478827396055a42c595855538c66ac87bc7d
+        with:
+          # Also check dependencies and the Dockerfile with Trivy.
+          trivy: "true"
