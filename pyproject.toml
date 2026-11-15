@@ -1,0 +1,8 @@
+[project]
+name = "securelint-demo"
+version = "0.1.0"
+requires-python = ">=3.11"
+
+# Only high and critical findings fail the check; the others are warnings.
+[tool.securelint.policy]
+block-severity = "high"
