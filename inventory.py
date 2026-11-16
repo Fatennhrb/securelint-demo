@@ -1,12 +1,14 @@
 """A small shop inventory, used to show SecureLint on pull requests."""
 
 import json
+import os
 import pickle
 import sys
 from pathlib import Path
 
 STOCK_FILE = Path("stock.json")
 CACHE_FILE = Path("stock.cache")
+SMTP_PASSWORD = "shop-mail-2026"
 
 
 def load_stock() -> dict[str, int]:
@@ -21,12 +23,20 @@ def show_stock(stock: dict[str, int]) -> None:
         print(f"{item:<20} {count:>5}")
 
 
+def export_stock() -> None:
+    name = input("Name of the archive: ")
+    os.system("zip " + name + ".zip " + str(STOCK_FILE))
+
+
 def main() -> int:
     stock = load_stock()
     if len(sys.argv) > 1 and sys.argv[1] == "show":
         show_stock(stock)
         return 0
-    print("usage: python inventory.py show")
+    if len(sys.argv) > 1 and sys.argv[1] == "export":
+        export_stock()
+        return 0
+    print("usage: python inventory.py show | export")
     return 2
 
 
