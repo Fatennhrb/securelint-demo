@@ -6,3 +6,14 @@ requires-python = ">=3.11"
 # Only high and critical findings fail the check; the others are warnings.
 [tool.securelint.policy]
 block-severity = "high"
+
+# The AI that explains findings with `scan --explain`: Gemini's free tier,
+# through its OpenAI-compatible address. The key is read from the
+# GEMINI_API_KEY environment variable, never from this file. On the free
+# tier Google may use what is sent to improve its products: fine for this
+# made-up demo code, not for a real project.
+[tool.securelint.ai]
+provider = "openai-compatible"
+model = "gemini-3.5-flash-lite"
+base-url = "https://generativelanguage.googleapis.com/v1beta/openai"
+api-key-env = "GEMINI_API_KEY"

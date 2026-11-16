@@ -18,7 +18,12 @@ jobs:
           fetch-depth: 0 # the whole history, to find the changed lines
           persist-credentials: false
       # Pinned to a commit of SecureLint, like every other action.
-      - uses: Fatennhrb/SecureLint@5197478827396055a42c595855538c66ac87bc7d
+      - uses: Fatennhrb/SecureLint@a822da532afa2ca546bbca24af04af65313b4e45
         with:
           # Also check dependencies and the Dockerfile with Trivy.
           trivy: "true"
+          # Add an AI explanation to each note (settings in pyproject.toml).
+          explain: "true"
+        env:
+          # A repository secret: never written in a file, hidden in the logs.
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
